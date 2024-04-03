@@ -16,22 +16,49 @@
 
 
 <?php
-# определяем с каким контроллером будем работать
+include_once '../config/config.php'; # Инициализация настроек
+include_once '../library/mainFunctions.php'; # основные функции
 
+# определяем с каким контроллером будем работать
 $controllerName = isset($_GET['controller']) ? ucfirst($_GET['controller']) : 'Index';
-echo 'Подключаемый php файл [Контроллер] = ' . $controllerName . '<br />';
+//echo 'Подключаемый php файл [Контроллер] = ' . $controllerName . '<br />';
 
 # Определяем с какой функцией будем работать
-
 $actionName = isset ($_GET['action']) ? $_GET['action'] : 'index';
 
-echo 'Функция формирующая страницу (Экшн) = ' . $actionName . '<br />';
+//echo 'Функция формирующая страницу (Экшн) = ' . $actionName . '<br />';
 
-// подключаем контроллер
+/*
+//код перенесли в function loadPage($controllerName, $actionName = 'index')
+ // подключаем контроллер
 
 include_once '../controllers/' . $controllerName . 'Controller.php';
 
-// http://fanshop.local/www/?controller=index&action=test
+# формируем название функции
+$function = $actionName . 'Action';
+
+echo "Полное название вызываемой функции = " . $function . '<br />';
+
+$function();
+
+# Константы для обращения к контроллерам в файл в /config/config.php
+
+define('PathPrefix', '../controllers/');
+define('PathPostfix', 'Controller.php');
+
+
+function loadPage($controllerName, $actionName = 'index')
+{
+    include_once PathPrefix . $controllerName . PathPostfix;
+
+    $function = $actionName . 'Action';
+    $function();
+
+};
+
+*/
+loadPage($controllerName, $actionName);
+
 
 
 
